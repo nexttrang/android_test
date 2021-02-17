@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/body_navigation"
+    app:startDestination="@id/bodyContentFragment">
+
+    <fragment
+        android:id="@+id/bodyContentFragment"
+        android:name="com.next.androidtest.ui.main.BodyContentFragment"
+        android:label="fragment_body_content"
+        tools:layout="@layout/fragment_body_content" >
+        <action
+            android:id="@+id/action_bodyContentFragment_to_infoDetailFragment"
+            app:destination="@id/infoDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/infoDetailFragment"
+        android:name="com.next.androidtest.ui.main.InfoDetailFragment"
+        android:label="fragment_info_detail"
+        tools:layout="@layout/fragment_info_detail">
+
+        <argument
+            android:name="visitorViewModel"
+            app:argType="com.next.androidtest.ui.main.VisitorViewModel"/>
+
+    </fragment>
+</navigation>
