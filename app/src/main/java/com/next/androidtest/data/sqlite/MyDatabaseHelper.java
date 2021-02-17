@@ -104,12 +104,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_VISITOR, new String[] { COLUMN_VISITOR_ID,
                         COLUMN_TIMESTAMP, COLUMN_VISITOR_NAME,COLUMN_TYPE,COLUMN_STATUS }, COLUMN_VISITOR_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+
+        if(cursor == null){
+            return  null;
+        }
+
+        cursor.moveToFirst();
 
         Visitor visitor = new Visitor(cursor.getString(0),
                 cursor.getString(1), cursor.getString(2),
                 cursor.getString(3), cursor.getString(4));
+
+        cursor.close();
+        db.close();
 
         // return visitor
         return visitor;
@@ -128,6 +135,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int count = cursor.getCount();
 
         cursor.close();
+        db.close();
 
         return count;
     }
@@ -152,7 +160,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
                 visitorList.add(visitor);
             } while (cursor.moveToNext());
+
+            cursor.close();
         }
+
+        db.close();
 
         // return note list
         return visitorList;
@@ -168,6 +180,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int count = cursor.getCount();
 
         cursor.close();
+        db.close();
 
         // return count
         return count;
